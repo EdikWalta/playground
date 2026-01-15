@@ -3,6 +3,9 @@ name: Build
 on:
   push:
 
+permissions:
+  checks: write
+
 jobs:
   build:
     name: job name here
