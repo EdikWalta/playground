@@ -1,17 +1,25 @@
-name: Build
+name: Backend Pipe
 
 on:
   push:
+    paths:
+        - 'backend/**'
+        - '.github/workflows/backend.yml'
 
 permissions:
   checks: write
   contents: read
   packages: write
 
+defaults:
+  run:
+    working-directory: backend
+
 jobs:
-  build:
+  gradle-build:
     name: test & build
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout sources
       uses: actions/checkout@v5
