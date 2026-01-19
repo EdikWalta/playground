@@ -20,7 +20,7 @@ jobs:
     - uses: actions/checkout@v6
     - name: dockerized build
       working-directory: frontend
-      run: docker build -t ghcr.io/edikwalta/playground-fe:latest
+      run: docker build -t ghcr.io/edikwalta/playground-fe:latest .
     - name: Push Docker Image
       working-directory: frontend
       run: docker push ghcr.io/edikwalta/playground-fe:latest
