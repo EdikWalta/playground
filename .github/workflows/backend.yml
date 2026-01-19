@@ -3,8 +3,8 @@ name: Backend Pipe
 on:
   push:
     paths:
-        - 'backend/**'
-        - '.github/workflows/backend.yml'
+      - 'backend/**'
+      - '.github/workflows/backend.yml'
 
 permissions:
   checks: write
