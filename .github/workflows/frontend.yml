@@ -1,0 +1,26 @@
+name: Frontend Pipe
+
+on:
+  push:
+    paths:
+        - 'frontend/**'
+        - '.github/workflows/frontend.yml'
+
+permissions:
+  checks: write
+  contents: read
+  packages: write
+
+jobs:
+  nextjs-build:
+    name: test & build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+    - name: dockerized build
+      working-directory: frontend
+      run: docker build -t ghcr.io/edikwalta/playground-fe:latest
+    - name: Push Docker Image
+      working-directory: frontend
+      run: docker push ghcr.io/edikwalta/playground-fe:latest
