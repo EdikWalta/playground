@@ -19,4 +19,9 @@ public class HelloWorldController {
     public String hello() {
         return helloWorldUseCase.getHelloWorld();
     }
+
+    @GetMapping("/goodbye")
+    public String goodbye() {
+        return "Goodbye World";
+    }
 }
