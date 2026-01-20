@@ -3,11 +3,10 @@ name: Frontend Pipe
 on:
   push:
     paths:
-        - 'frontend/**'
-        - '.github/workflows/frontend.yml'
+      - 'frontend/**'
+      - '.github/workflows/frontend.yml'
 
 permissions:
-  checks: write
   contents: read
   packages: write
 
@@ -18,15 +17,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v6
-    - name: dockerized build
-      working-directory: frontend
-      run: docker build -t ghcr.io/edikwalta/playground-fe:latest .
+
     - name: Login to GHCR
       uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}  
-    - name: Push Docker Image
-      working-directory: frontend
-      run: docker push ghcr.io/edikwalta/playground-fe:latest
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        context: frontend/
+        push: true
+        tags: ghcr.io/edikwalta/playground-fe:${{ github.sha }}
